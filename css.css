@@ -1,0 +1,40 @@
+ul{
+    list-style-type: none;
+    color :white;
+}
+li{
+    color:white;
+    font-size: 20px;
+    list-style-type: none;
+}
+h1{
+    text-align: center;
+    grid-area: header;
+}
+body{
+    background-color: gray;
+}
+#grid-container{
+    align-content: center;
+    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(16, 20px);
+    grid-template-rows: repeat(16, 20px);
+    float:left;
+    margin-left: 26%;
+    
+}
+.grid-cell{
+    background-color: white;
+}
+#options{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    float: left;
+    background-color: black;
+    border-radius: 5%;
+    padding: 5% 2% 15% 2%;
+
+    
+}
