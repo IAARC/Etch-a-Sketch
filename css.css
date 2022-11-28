@@ -2,6 +2,10 @@ ul{
     list-style-type: none;
     color :white;
 }
+#play{
+    display: block;
+
+}
 li{
     color:white;
     font-size: 20px;
@@ -9,32 +13,54 @@ li{
 }
 h1{
     text-align: center;
-    grid-area: header;
+    color: rgba(0, 146, 255, 1);
 }
 body{
-    background-color: gray;
+    background-color: rgba(0, 0, 0, 0.90);
+    margin-left: 1vh;
 }
 #grid-container{
     align-content: center;
     justify-content: center;
     display: grid;
-    grid-template-columns: repeat(16, 20px);
-    grid-template-rows: repeat(16, 20px);
+    grid-template-columns: repeat(16, 1fr );
+    grid-template-rows: repeat(16, 1fr);
     float:left;
-    margin-left: 26%;
-    
+    margin-left: 15%;
+    border: 3px solid brown;
+    width : 480px;
+    height: 480px;
 }
 .grid-cell{
     background-color: white;
 }
 #options{
+    background-color: rgba(0, 146, 255, 1);
     display: flex;
-    justify-content: center;
-    flex-direction: column;
     float: left;
-    background-color: black;
-    border-radius: 5%;
-    padding: 5% 2% 15% 2%;
-
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 500px;
+    width: 200px;
+    border-radius: 2%;
+}
+button{
+    font-size: large;
+}
+button:hover{
+    background-color: gray;
+    color:white;
+}
+#size{
+    color: black;
+    font-size:x-large;
+    align-self: center;
     
+}
+input{
+    width: 50px;
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: 3%;
 }

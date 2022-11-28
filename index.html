@@ -9,16 +9,22 @@
     <title>test</title>
 </head>
 <body>
-    <div id="container">
-        <h1>Etch a Sketch!</h1>
-        <div id="options">
-            <ul>Play!</ul>
-                <li>Select the color</li>
-                <li>Size</li>
-                <li><button id="restart">restart</button></li>
+    <h1>Etch a Sketch!</h1>
+    <div id="options">
+        <div id="size">
+            <label for="select_size">Select Size</label>
+            <input type="text" id="select_size" name="select_size">
         </div>
-        <div id="grid-container">
+        <div id="color_picker">
+            <button id="color">rainbow mode!</button>
+        </div>
+        <div id="eraser">
+            <button id="eraser">erarer</button>
+        </div>
+        <div id="restart">
+            <button id="restart" type="button">restart!</button>
         </div>
     </div>
+    <div id="grid-container"></div>
 </body>
 </html>
