@@ -1,66 +1,25 @@
-ul{
-    list-style-type: none;
-    color :white;
-}
-#play{
-    display: block;
-
-}
-li{
-    color:white;
-    font-size: 20px;
-    list-style-type: none;
+body{
+    background-color: rgba(216, 219, 221, 0.3);
 }
 h1{
+    font-size: 2.5em;
+    font-weight: bold;
     text-align: center;
-    color: rgba(0, 146, 255, 1);
-}
-body{
-    background-color: rgba(0, 0, 0, 0.90);
-    margin-left: 1vh;
-}
-#grid-container{
-    align-content: center;
-    justify-content: center;
-    display: grid;
-    grid-template-columns: repeat(16, 1fr );
-    grid-template-rows: repeat(16, 1fr);
-    float:left;
-    margin-left: 15%;
-    border: 3px solid brown;
-    width : 480px;
-    height: 480px;
-}
-.grid-cell{
-    background-color: white;
 }
 #options{
-    background-color: rgba(0, 146, 255, 1);
+    float:left;
     display: flex;
-    float: left;
     flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    height: 500px;
-    width: 200px;
-    border-radius: 2%;
+    width: 250px;
+    height: 400px;
 }
-button{
-    font-size: large;
+#grid-container{
+    display: grid;
+    width: 420px;
+    height: 420px;
+    margin-left: 35%;
+    border: 2px solid black;
 }
-button:hover{
-    background-color: gray;
-    color:white;
-}
-#size{
-    color: black;
-    font-size:x-large;
-    align-self: center;
-    
-}
-input{
-    width: 50px;
-    padding: 5px;
-    border: 1px solid black;
-    border-radius: 3%;
+.cell{
+    background-color: white;
 }

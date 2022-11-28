@@ -1,72 +1,76 @@
-const container = document.getElementById('grid-container');
-const btnRestart = document.getElementById('restart');
-const userSize = document.getElementById('size');
-const rainbowMode = document.getElementById('color');
-const eraserMode = document.getElementById('eraser');
-let isHover = false;
-let isRainbow = false;
-let eraser = false;
-const size = userSize.addEventListener('keydown',function(e){
-    if(e.keyCode === 13){
-        const size = e.target.value * 1;
-        if (size <= 100){
-        restartGrid();
-        makeGrid(size,size);
-        } else {
-        alert('error! insert a number lower than 100!');
+//start pickr
+const pickr = Pickr.create({
+    el: '.color-picker',
+    theme: 'classic', 
+    default: 'black',
+
+    components: {
+
+        // Main components
+        preview: true,
+        opacity: true,
+        hue: true,
+
+        // Input / output Options
+        interaction: {
+            rgba: true,
+            input: true,
+            clear: true,
+            save: true
         }
-    } else {
-        return;
     }
 });
+// end pickr
+const container = document.getElementById('grid-container');
+const btnRestart = document.getElementById('clear');
+const userSize = document.getElementById('size');
+const rainbowMode = document.getElementById('rainbow');
+const eraserMode = document.getElementById('eraser');
 
-function rainbow(){
-        var num = Math.round(0xffffff * Math.random());
-        var r = num >> 16;
-        var g = num >> 8 & 255;
-        var b = num & 255;
-        return 'rgb(' + r + ', ' + g + ', ' + b + ')';
-} 
-function restartGrid(){
-    const cell = document.querySelectorAll('.grid-cell');
-    makeGrid(16,16);
-    cell.forEach(item => {
-        item.style.backgroundColor = 'white';
-    })
-}
-function makeGrid(rows, cols) {
-    for(let i = 0; i < (rows * cols) ; i++){
-        const cell = document.createElement('div');
-        container.style.gridTemplateColumns = `repeat(${rows}, 1fr)`;
-        container.style.gridTemplateRows = `repeat(${cols}, 1fr)`;
-        cell.className = 'grid-cell';
-        cell.setAttribute('id','grid-cell' + i);
-        
-        container.appendChild(cell);
+let currentMode = 'paint';
+let isRainbow = false;
+let isEraser = false
+let painting = true;
+let rgbaColor = 'black';
+
+function newGrid(size){
+    for (let i = 0; i < size * size; i++) {
+        const newCell = document.createElement('div');
+        newCell.classList.add('cell');
+        container.appendChild(newCell);
+        container.style.gridTemplateColumns = `repeat(${size}, 1fr)`
+        container.style.gridTemplateRows = `repeat(${size}, 1fr)`
     }
 }
-container.addEventListener('mousedown',function(e){
-    isHover = true;
+function clearGrid(){
+    container.innerHTML = '';
+    newGrid(16);
+}
+pickr.on('change',(color, instance) => {
+    rgbaColor = color.toRGBA().toString();
+    currentMode = 'paint';
 });
 
-container.addEventListener('mousemove',function(e){
-    const cell = e.target;
-    if (isHover && isRainbow){
+const rainbow = function(){
+    let r = Math.floor(Math.random() * 256);
+    let g = Math.floor(Math.random() * 256);
+    let b = Math.floor(Math.random() * 256);
+    return `rgb(${r},${g},${b})`;
+}
+
+container.onclick = () => painting = !painting;
+rainbowMode.onclick = () => currentMode = 'rainbow';
+eraserMode.onclick = () => currentMode = 'eraser';
+btnRestart.onclick = () => clearGrid();
+container.addEventListener('mouseover', (e) => {
+    let cell = e.target;
+    if (e.type === 'mouseover' && painting) return;
+        if (currentMode === 'rainbow'){
         cell.style.backgroundColor = rainbow();
-    } else if (eraser && isHover){
+    } else if (currentMode === 'eraser'){
         cell.style.backgroundColor = 'white';
-    } else if (isHover){
-        cell.style.backgroundColor = 'black';
+    } else if (currentMode === 'paint'){
+        cell.style.backgroundColor = rgbaColor;
     }
 });
-container.addEventListener('mouseup',function(e){
-    isHover = false;
-});
-btnRestart.addEventListener('click',restartGrid);
-rainbowMode.addEventListener('click',function(){
-    isRainbow = !isRainbow;
-});
-eraserMode.addEventListener('click',function(){
-    eraser =!eraser;
-});
-makeGrid(16,16);
+newGrid(16);
