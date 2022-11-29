@@ -23,10 +23,12 @@ const pickr = Pickr.create({
 // end pickr
 const container = document.getElementById('grid-container');
 const btnRestart = document.getElementById('clear');
-const userSize = document.getElementById('size');
+const userSize = document.getElementById('select-size');
 const rainbowMode = document.getElementById('rainbow');
 const eraserMode = document.getElementById('eraser');
+const btnSubmit = document.getElementById('submit');
 
+let currentSize = 16
 let currentMode = 'paint';
 let isRainbow = false;
 let isEraser = false
@@ -44,13 +46,15 @@ function newGrid(size){
 }
 function clearGrid(){
     container.innerHTML = '';
-    newGrid(16);
+    newGrid(currentSize);
 }
 pickr.on('change',(color, instance) => {
     rgbaColor = color.toRGBA().toString();
     currentMode = 'paint';
 });
-
+pickr.on('show',(color, instance) => {
+    currentMode = 'paint';
+});
 const rainbow = function(){
     let r = Math.floor(Math.random() * 256);
     let g = Math.floor(Math.random() * 256);
@@ -72,5 +76,13 @@ container.addEventListener('mouseover', (e) => {
     } else if (currentMode === 'paint'){
         cell.style.backgroundColor = rgbaColor;
     }
+});
+btnSubmit.addEventListener('click', (e) => {
+    let value = userSize.value * 1;
+    console.log(value);
+    if (value <= 0 || isNaN(value)) return alert('Invalid value');
+    if (value > 64) return alert('Select a lower value');
+    currentSize = value;
+    clearGrid();
 });
 newGrid(16);
